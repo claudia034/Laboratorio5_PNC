@@ -1,52 +1,63 @@
 # Laboratorio5-00037221
 
-Aplicacion Spring Boot modernizada con pruebas unitarias Mockito, Docker Compose con PostgreSQL y pipeline CI/CD para publicar en Docker Hub.
+Proyecto Spring Boot con pruebas unitarias, Docker y GitHub Actions.
 
 ## Requisitos
 
 - Java 17
-- Docker y Docker Compose
-- Cuenta de Docker Hub para publicar la imagen desde GitHub Actions
+- Docker
+- Docker Compose
 
-## Tests
+## Ejecutar pruebas
 
 ```bash
 ./mvnw test
 ```
 
-Las pruebas unitarias del servicio usan `@Mock` e `@InjectMocks`; no levantan el contexto completo de Spring ni usan H2.
+## Levantar con Docker
 
-## Docker local
+Primero crear o completar el archivo `.env` con los datos de la base:
 
-Define las variables de entorno antes de levantar los contenedores:
+```env
+POSTGRES_DB=laboratorio
+POSTGRES_USER=lab_user
+POSTGRES_PASSWORD=change-me
+DOCKER_IMAGE=laboratorio5-00037221:local
+```
+
+Luego ejecutar:
 
 ```bash
-export POSTGRES_DB=laboratorio
-export POSTGRES_USER=lab_user
-export POSTGRES_PASSWORD=change-me
-export DOCKER_IMAGE=laboratorio5-00037221:local
 docker compose up --build
 ```
 
-La API queda disponible en `http://localhost:8080` y la prueba de humo usa `http://localhost:8080/actuator/health/readiness`.
+La API queda en:
 
-## GitHub Actions
+```text
+http://localhost:8080
+```
 
-El workflow `.github/workflows/ci-cd.yml` ejecuta:
+Health check:
 
-1. Compilacion y pruebas unitarias con Maven.
-2. Construccion temporal con Docker Compose.
-3. Prueba de humo con `curl` contra Actuator.
-4. Publicacion en Docker Hub solo cuando el cambio llega a `main`.
+```text
+http://localhost:8080/actuator/health/readiness
+```
 
-Configura estos secretos en GitHub:
+## CI/CD
+
+El workflow de GitHub Actions hace lo siguiente:
+
+1. Ejecuta las pruebas.
+2. Construye los contenedores.
+3. Hace una prueba de humo con `curl`.
+4. Publica la imagen en Docker Hub cuando se sube a `main`.
+
+Secretos usados en GitHub:
 
 - `DOCKERHUB_USERNAME`
 - `DOCKERHUB_TOKEN`
 
-Configura una regla de proteccion para `main` exigiendo que el check `Tests and Docker smoke test` pase antes de permitir merge.
-
-## Entregables
+## Enlaces
 
 - Repositorio: `https://github.com/claudia034/Laboratorio5_PNC`
 - Docker Hub: `https://hub.docker.com/r/claudia034/laboratorio5-00037221`
