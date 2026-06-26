@@ -56,8 +56,3 @@ Secretos usados en GitHub:
 
 - `DOCKERHUB_USERNAME`
 - `DOCKERHUB_TOKEN`
-
-## Enlaces
-
-- Repositorio: `https://github.com/claudia034/Laboratorio5_PNC`
-- Docker Hub: `https://hub.docker.com/r/claudia034/laboratorio5-00037221`
