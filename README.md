@@ -48,5 +48,5 @@ Configura una regla de proteccion para `main` exigiendo que el check `Tests and 
 
 ## Entregables
 
-- Repositorio: `https://github.com/<usuario>/<repositorio>`
-- Docker Hub: `https://hub.docker.com/r/<usuario>/laboratorio5-00037221`
+- Repositorio: `https://github.com/claudia034/Laboratorio5_PNC`
+- Docker Hub: `https://hub.docker.com/r/claudia034/laboratorio5-00037221`
